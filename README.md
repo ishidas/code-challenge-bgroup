@@ -1,0 +1,2 @@
+# code-challenge-bgroup
+-Back-end of the app needs to store, retrieve data from a MySQL DB. - Front-end of the app needs to provide users with a way to:               - Create their own data              - Search data [theirs or any users]   - Front-end of the app also leverages a CSS framework [Materialize, Foundation…] - All code for the app should be sourced in a Github repo; integrated with AWS for continuous deployment.
