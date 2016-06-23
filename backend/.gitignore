@@ -2,3 +2,4 @@ node_modules
 .eslintrc
 db
 DS_Store
+env.sh
