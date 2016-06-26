@@ -34,8 +34,11 @@ controller: myController
     </div>
     <input type="submit" ng-click="postUserInput()" name="posting" class="button" value="Submit"></input>
   </form>
-
-
+  <input type="button" ng-click="getAllData()" class="button success" value="Get All Data"></input>
+  <section ng-repeat="item in dataFromDb">
+    <h3>{{item.note_title}}</h3>
+    <p>{{item.note_food_nmae}}</p>
+  </section>
 
   <p class="lead">Code Challenge - Sawako Ishida</p>
 </div>

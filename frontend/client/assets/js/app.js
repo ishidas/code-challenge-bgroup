@@ -31,6 +31,7 @@
     FastClick.attach(document.body);
   }
 
+//my controller
   app.controller('myController',['$http','$scope',($http, $scope)=>{
     var baseUrl = 'http://localhost:3000';
 
@@ -53,8 +54,8 @@
     $scope.getAllData = function(){
       $http.get(baseUrl + '/')
       .then((res)=>{
-        console.log('response array',res);
-        $scope.dataFromDb = res;
+        $scope.dataFromDb = res.data;
+        console.log('response array',res.data);
       });
     };
   }]);
