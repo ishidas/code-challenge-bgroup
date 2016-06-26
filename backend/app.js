@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const debug = require('debug')('noteApp:app');
 const mysql = require('mysql');
@@ -18,6 +19,7 @@ connectApp.connect((err)=>{
   debug('Successfully connected!');
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res)=>{
