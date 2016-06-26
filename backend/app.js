@@ -32,13 +32,35 @@ app.get('/', (req, res)=>{
   });
 });
 
+app.get('/:id', (req, res)=>{
+  debug('inside of GET by id route');
+  var id = req.params.id;
+  connectApp.query('SELECT * FROM note_app WHERE ?',{note_id: id},(err, results)=>{
+    if(err) return console.error(err);
+    console.log('search by id result',results);
+    res.json(results);
+  });
+});
+
+app.get('/user/:id', (req, res)=>{
+  var user = req.params.id;
+  console.log('user name???', user);
+  debug('inside of GET by note_food_name route');
+  connectApp.query('SELECT * FROM note_app WHERE ?', {note_user_name: user}, (err, results)=>{
+    if(err) return console.error(err);
+    console.log('Search by user name', results);
+    res.json(results);
+  });
+});
+
 app.post('/new', (req, res)=>{
   var data = req.body;
   // var date = new Date();
   console.log(data);
   connectApp.query('INSERT INTO note_app SET ?', {
     note_title: data.note_title,
-    note_food_nmae: data.note_food_nmae,
+    note_food_name: data.note_food_name,
+    note_user_name: data.note_user_name,
     submission_date: data.submission_date
   },(err, results)=>{
     // connectApp.end();
@@ -53,7 +75,7 @@ app.delete('/delete/:id', (req, res)=>{
   var id = req.params.id;
   console.log('id in delete route', id);
   debug('hitting delete route');
-  connectApp.query('DELETE FROM note_app WHERE ?',{note_id: id }, (err, results)=>{
+  connectApp.query('DELETE FROM note_app WHERE ?',{note_id: id}, (err, results)=>{
     // connectApp.end();
     if(err) return console.error(err);
     console.log('Delete results', results);

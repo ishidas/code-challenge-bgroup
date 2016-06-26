@@ -58,6 +58,11 @@
         console.log('response array',res.data);
       });
     };
+
+    //seach by id
+    $scope.getByFoodName = function(){
+      $http.get(baseUrl + '/')
+    }
   }]);
 
 })();
