@@ -79,7 +79,7 @@ app.delete('/delete/:id', (req, res)=>{
     // connectApp.end();
     if(err) return console.error(err);
     console.log('Delete results', results);
-    res.json(results);
+    res.json({message: 'Successfully Deleted!'});
   });
 });
 

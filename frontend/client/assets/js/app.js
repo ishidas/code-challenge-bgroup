@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   var app = angular.module('application', [
     'ui.router',
     'ngAnimate',
@@ -31,16 +30,20 @@
     FastClick.attach(document.body);
   }
 
+
 //my controller
   app.controller('myController',['$http','$scope',($http, $scope)=>{
     var baseUrl = 'http://localhost:3000';
 
     $scope.userInput = {
       note_title: '',
-      note_food_nmae: ''
+      note_user_name: '',
+      note_food_name: ''
     };
     //temprorarily storing array of get data
     $scope.dataFromDb;
+    $scope.dataFromDbById;
+    $scope.resInfo;
 
     //http post request to /new end point
     $scope.postUserInput = function(){
@@ -59,10 +62,30 @@
       });
     };
 
-    //seach by id
-    $scope.getByFoodName = function(){
-      $http.get(baseUrl + '/')
-    }
+    //seach by user
+    $scope.getItemByUser = function(input){
+      var user = input.note_user_name;
+      console.log('here is user name', user);
+      $http.get(baseUrl + '/user/' + user)
+      .then((res)=>{
+        $scope.dataFromDbById = res.data;
+        console.log('getItemById function', res.data);
+      });
+    };
+
+    //deleting all data
+    $scope.deleteById = function(input){
+      var id = input.note_id;
+      $http.delete(baseUrl + '/delete/' + id)
+      .then((res)=>{
+        console.log('delete res cli', res);
+        $scope.resInfo = res.data;
+        $scope.dataFromDbById = {};
+        $scope.dataFromDb.filter((data)=>{
+          return data.note_id === id;
+        });
+      });
+    };
   }]);
 
 })();
